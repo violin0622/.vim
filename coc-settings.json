@@ -1,0 +1,55 @@
+{
+  "languageserver": {
+    "golang": {
+      "command": "gopls"
+      ,"rootPatterns": ["go.mod"]
+      ,"filetypes": ["go"]
+    }
+    ,"clangd": {
+      "command": "clangd",
+      "rootPatterns": [".git/", "compile_flags.txt", "compile_commands.json"],
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+    }
+    ,"cmake": {
+      "command": "cmake-language-server",
+      "filetypes": ["cmake"],
+      "rootPatterns": [
+        "build/"
+      ],
+      "initializationOptions": {
+        "buildDirectory": "build"
+      }
+    }
+    ,"bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"]
+    }
+  }
+  ,"explorer.icon.enableNerdfont": true
+  ,"coc.preferences.jumpCommand": "tab drop"
+  ,"markdownlint.config": {
+    "default": true
+    ,"MD022": false
+    ,"MD024": false
+  }
+
+  ,"java.configuration.runtimes": [{
+    "name": "JavaSE-1.8"
+    ,"path": "/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
+  },{
+    "name": "JavaSE-11"
+    ,"path": "/opt/homebrew/Cellar/openjdk@11/11.0.15/libexec/openjdk.jdk/Contents/Home"
+  },{
+    "name": "JavaSE-17"
+    ,"path": "/opt/homebrew/Cellar/openjdk/18.0.1/libexec/openjdk.jdk/Contents/Home"
+    ,"default": true
+  }]
+  ,"java.jdt.ls.home": "/opt/homebrew/Cellar/jdtls/1.10.0/libexec"
+
+  ,"rust-analyzer.server.path": "/opt/homebrew/bin/rust-analyzer"
+  ,"rust-analyzer.cargo.runBuildScripts": true
+  ,"rust-analyzer.inlayHints.parameterHints": true
+  ,"rust-analyzer.inlayHints.typeHints": true
+  ,"rust-analyzer.inlayHints.chainingHints": true
+}
