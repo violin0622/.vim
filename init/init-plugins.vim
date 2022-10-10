@@ -9,6 +9,9 @@ endif
 call plug#begin(plug_position)
 Plug 'junegunn/vim-plug',{'do': plug_copy_command}
 
+" Language support """"""""""""""""""""""""""
+Plug 'sheerun/vim-polyglot'
+
 " Chinese Document""""""""""""""""""""""""""""
 Plug 'yianwillis/vimcdoc'
 
@@ -20,10 +23,9 @@ Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 Plug 'crusoexia/vim-monokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
-
+Plug 'joshdick/onedark.vim'
 " status line""""""""""""""""""""
 Plug 'vim-airline/vim-airline'
-
 " Markdown""""""""""""""""""""
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'

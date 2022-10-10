@@ -52,8 +52,8 @@ set mouse+=a
 set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m
 
 " 设置分隔符可视
-set listchars=tab:\|\ ,trail:·,extends:>,precedes:<
-
+set listchars=tab:│\ ,leadmultispace:\|\ \ \ ,trail:·,extends:>,precedes:<
+set fillchars+=vert:‖ 
 " 合并两行中文时，不在中间加空格
 set formatoptions+=B
 

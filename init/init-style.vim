@@ -58,23 +58,27 @@ endif
 " 设置黑色背景
 set background=dark
 
-if g:vim_env.running=='terminal'
-	" 允许 256 色
-	set t_Co=256
+" if g:vim_env.running=='terminal'
+" 	" 允许 256 色
+" 	" set t_Co=256
+" endif
+if has("termguicolors")
+    	" enable true color
+    	set termguicolors
 endif
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-"colorscheme tomorrow-night
-colorscheme monokai
+colorscheme onedark
+" colorscheme monokai
 
 "----------------------------------------------------------------------
 " 状态栏设置
 "----------------------------------------------------------------------
-set statusline=																 " 清空状态栏
-set statusline+=\ %t														" 文件名
-set statusline+=\ [%M%n%R%H]							 " buffer 编号和状态
-set statusline+=%=															" 向右对齐
-set statusline+=\ %0([%Y,%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %v:%l/%L%)			" 文件类型
+set statusline=											" 清空状态栏
+set statusline+=\ %t										" 文件名
+set statusline+=\ [%M%n%R%H]									" buffer 编号和状态
+set statusline+=%=										" 向右对齐
+set statusline+=\ %0([%Y,%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %v:%l/%L%)		" 文件类型
 
 "----------------------------------------------------------------------
 " 图形界面设置
@@ -111,8 +115,6 @@ else
 	hi! SpellLocal term=underline cterm=underline
 endif
 
-
-
 if g:colors_name == 'monokai'
 	hi LineNr				guibg=#1b1c17
 	hi SpecialKey		guibg=NONE
@@ -121,8 +123,8 @@ if g:colors_name == 'monokai'
 	hi ErrorMsg			guifg=pink    guibg=NONE
 	hi WarnningMsg	guifg=pink    guibg=NONE
 
-	hi! Pmenu guibg=gray guifg=black ctermbg=gray ctermfg=black
-	hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
+	" hi! Pmenu guibg=gray guifg=black ctermbg=gray ctermfg=black
+	" hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
 elseif g:colors_name == 'dessert'
 	" 去掉 sign column 的白色背景
 	hi! SignColumn guibg=NONE ctermbg=NONE
