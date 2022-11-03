@@ -43,12 +43,14 @@ set splitright
 " 垂直切割窗口时，默认在下边显示新窗口
 set splitbelow
 
-if vim_env.os == 'windows'
-		set guifont=Consolas:h12	"设置字体字号
-elseif vim_env.os == 'mac'
+if has('win32') || has('win64') || has('win32unix')
+	set guifont=Consolas:h12	"设置字体字号
+elseif has('mac') || has('macunix')
 		"set macligatures
 		"set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
 		set guifont=FiraCodeNerdFontComplete-Regular:h13
+elseif has('unix')
+	set guifont=FiraCode\ Nerd\ Font\ 13
 endif
 
 "----------------------------------------------------------------------
@@ -58,17 +60,25 @@ endif
 " 设置黑色背景
 set background=dark
 
-" if g:vim_env.running=='terminal'
-" 	" 允许 256 色
-" 	" set t_Co=256
-" endif
 if has("termguicolors")
     	" enable true color
     	set termguicolors
 endif
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-colorscheme onedark
+try
+	colorscheme onedark
+catch
+	try
+		colorscheme tomorrow
+	catch
+		try
+			colorscheme monokai
+		catch
+			colorscheme default
+		endtry
+	endtry
+endtry
 " colorscheme monokai
 
 "----------------------------------------------------------------------
@@ -83,7 +93,7 @@ set statusline+=\ %0([%Y,%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %v:
 "----------------------------------------------------------------------
 " 图形界面设置
 "----------------------------------------------------------------------
-if g:vim_env.running=='gui'
+if has('gui_running')
 	set guioptions-=T		 "关闭工具栏
 	set guioptions-=m		 "关闭菜单栏
 	set guioptions-=r		 "关闭右侧滚动条
@@ -103,7 +113,7 @@ hi! clear SpellBad
 hi! clear SpellCap
 hi! clear SpellRare
 hi! clear SpellLocal
-if g:vim_env.running=='gui'
+if has('gui_running')
 	hi! SpellBad gui=undercurl guisp=red
 	hi! SpellCap gui=undercurl guisp=blue
 	hi! SpellRare gui=undercurl guisp=magenta
@@ -322,7 +332,7 @@ endfunc
 " 标签栏最终设置
 "----------------------------------------------------------------------
 set tabline=%!Vim_NeatTabLine()
-if g:vim_env.running == 'gui'
+if has('gui_running')
 	set guitablabel=%{Vim_NeatGuiTabLabel()}
 	set guitabtooltip=%{Vim_NeatGuiTabTip()}
 endif
@@ -330,7 +340,7 @@ endif
 "----------------------------------------------------------------------
 " 光标显示设置
 "----------------------------------------------------------------------
-if g:vim_env.running == 'gui'	 "更改光标显示方式
+if has('gui_running')	 "更改光标显示方式
 	set guicursor=n-v-ve-o:block-Cursor/lCursor-blinkwait0,
 				\i-c-ci:ver25-Cursor/lCursor-blinkwait500-blinkoff500-blinkon900,
 				\r-cr:hor30-Cursor/lCursor-blinkwait500-blinkoff500-blinkon900,
@@ -345,3 +355,4 @@ function! SynGroup()
 	let l:s = synID(line('.'), col('.'), 1)
 	echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
+

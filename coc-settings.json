@@ -47,7 +47,7 @@
   }]
   ,"java.jdt.ls.home": "/opt/homebrew/Cellar/jdtls/1.10.0/libexec"
 
-  ,"rust-analyzer.server.path": "/opt/homebrew/bin/rust-analyzer"
+  ,"rust-analyzer.server.path": "/usr/bin/rust-analyzer"
   ,"rust-analyzer.cargo.runBuildScripts": true
   ,"rust-analyzer.inlayHints.parameterHints": true
   ,"rust-analyzer.inlayHints.typeHints": true

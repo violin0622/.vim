@@ -1,16 +1,22 @@
-if vim_env.os == 'windows'
+if has('win32') || has('win64') || has('win32unix')
 	let plug_position = '$VIM/vimfiles/plugs'
 	let plug_copy_command = 'copy "'.$VIM.'\vimfiles\plugs\vim-plug\plug.vim" "'.$VIM.'\vimfiles\autoload\"'
-elseif vim_env.os == 'unix' || vim_env.os == 'mac'
+elseif has('unix') || has('mac') || has ('macunix')
 	let plug_position = '~/.vim/plugs'
 	let plug_copy_command = 'cp ~/.vim/plugs/vim-plug/plug.vim ~/.vim/autoload/'
 endif
 
+" automatically install Plug.vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
 call plug#begin(plug_position)
-Plug 'junegunn/vim-plug',{'do': plug_copy_command}
+"Plug 'junegunn/vim-plug',{'do': plug_copy_command}
 
 " Language support """"""""""""""""""""""""""
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 
 " Chinese Document""""""""""""""""""""""""""""
 Plug 'yianwillis/vimcdoc'
@@ -19,13 +25,14 @@ Plug 'yianwillis/vimcdoc'
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 "colorschemes""""""""""""""""""""
-"Plug 'sickill/vim-monokai'
 Plug 'crusoexia/vim-monokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'joshdick/onedark.vim'
+
 " status line""""""""""""""""""""
 Plug 'vim-airline/vim-airline'
+
 " Markdown""""""""""""""""""""
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
@@ -50,22 +57,21 @@ Plug 'liuchengxu/vim-clap'
 " buffer manage""""""""""""""""""""
 Plug 'Asheq/close-buffers.vim'
 
-" smooth scrolling""""""""""""""""" 
-Plug 'psliwka/vim-smoothie'
+" smooth scrolling"""""""""""""""""
+"Plug 'psliwka/vim-smoothie'
+
 "code enhance""""""""""""""""""""
-"Plug 'wsdjeg/vim-todo'
 Plug 'Dimercel/todo-vim'
+
 " outliner
 Plug 'liuchengxu/vista.vim'
+
 "completion and lsp support
 Plug 'neoclide/coc.nvim', {'branch':'release'}
-"git
-Plug 'tpope/vim-fugitive'
+
 "comment
 Plug 'tpope/vim-commentary'
 
-" leetcode
-Plug 'mbledkowski/neuleetcode.vim'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -102,7 +108,7 @@ nmap <Leader><Leader>j <Plug>(easymotion-overwin-line)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " Vista """""""""""""""""""""""""""""""""""""""""""
-let g:vista_default_executive = 'ctags'
+let g:vista_default_executive = 'coc'
 
 " Set the executive for some filetypes explicitly. Use the explicit executive
 " instead of the default one for these filetypes when using `:Vista` without
@@ -113,12 +119,12 @@ let g:vista_executive_for = {
 	\ }
 
 let g:vista_blink = [1,100]
-if g:vim_env.os == 'mac'
-	nnoremap <silent><d-7> :Vista!!<CR>
+if has('mac') || has('macunix')
+	nnoremap <silent><D-7> :Vista!!<CR>
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" Coc exlorer """"""""""""""""""""""""""""""""""""""" 
+" Coc exlorer """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'coc.nvim')
 " window mappings
 	noremap <silent><d-1> :CocCommand explorer<CR>
@@ -145,17 +151,17 @@ if has_key(g:plugs, 'coc.nvim')
 		endif
 	endfunction
 
-	"" highlight symbol under the cursor. 
+	"" highlight symbol under the cursor.
 	autocmd CursorHold * silent call CocActionAsync('highlight')
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim-Witch-Key """"""""""""""""""""""""""""""""""""""" 
+" Vim-Witch-Key """""""""""""""""""""""""""""""""""""""
 autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" AirLine """"""""""""""""""""""""""""""""""""""" 
+" AirLine """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'vim-airline')
 	let g:airline_experimental = 1
 	let g:airline_detect_iminsert=0
@@ -168,7 +174,7 @@ if has_key(g:plugs, 'vim-airline')
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" Commentary """"""""""""""""""""""""""""""""""""""" 
+" Commentary """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'vim-commentary')
 	silent! unmap gc
 	silent! unmap gcc
@@ -176,7 +182,3 @@ if has_key(g:plugs, 'vim-commentary')
 	map <Leader>/ <Plug>Commentary
 	map <Leader>// <Plug>CommentaryLine
 endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Leetcode """""""""""""""""""""""""""""""""""""""""""
-let g:leetcode_browser = 'chrome'
