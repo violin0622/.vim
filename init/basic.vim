@@ -18,6 +18,9 @@ vim9script
 # 禁用 vi 兼容模式
 set nocompatible
 
+# 文件变更自动加载
+set autoread
+
 # 设置 Backspace 键模式
 set backspace=eol,start,indent
 
@@ -41,6 +44,9 @@ set ttimeoutlen=50
 
 # 显示光标位置
 set ruler
+
+# 关联系统剪贴板
+set clipboard^=unnamed
 
 #----------------------------------------------------------------------
 # 搜索设置
