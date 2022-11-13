@@ -3,3 +3,4 @@ plugs/
 *.swp
 
 .DS_Store
+.netrwhist

@@ -50,8 +50,11 @@ elseif has('mac') || has('macunix')
 		"set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
 		set guifont=FiraCodeNerdFontComplete-Regular:h13
 elseif has('unix')
-	set guifont=FiraCode\ Nerd\ Font\ 13
+	set guifont=FiraCode\ Nerd\ Font\ 11
 endif
+
+" 设置连字显示
+set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
 
 "----------------------------------------------------------------------
 " 颜色主题：色彩文件位于 colors 目录中
@@ -350,9 +353,7 @@ else
 endif
 
 
-
 function! SynGroup()
 	let l:s = synID(line('.'), col('.'), 1)
 	echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
-

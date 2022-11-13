@@ -88,6 +88,9 @@ if &term =~ '256color' && $TMUX != ''
 	set t_ut=
 endif
 
+if &term =~ 'xterm-kitty'
+	set t_ut=
+endif
 
 #----------------------------------------------------------------------
 # 配置微调

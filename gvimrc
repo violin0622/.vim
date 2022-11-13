@@ -1,2 +1,4 @@
 set shell=/bin/zsh\ -i
-set macligatures
+if has('mac') || has ('macunix')
+	set macligatures
+endif

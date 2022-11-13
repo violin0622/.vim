@@ -120,24 +120,36 @@ let g:vista_executive_for = {
 
 let g:vista_blink = [1,100]
 if has('mac') || has('macunix')
-	nnoremap <silent><D-7> :Vista!!<CR>
+	nnoremap <silent><D-2> :Vista!!<CR>
+elseif has('unix')
+	if has('gui_running')
+		nnoremap <silent><M-2> :Vista!!<CR>
+	else
+		nnoremap <silent>2 :Vista!!<CR>
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Coc exlorer """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'coc.nvim')
 " window mappings
-	noremap <silent><d-1> :CocCommand explorer<CR>
+	if has('mac') || has('macunix')
+		nnoremap <silent><D-1> :CocCommand explorer<CR>
+	elseif has('unix')
+		if has('gui_running')
+			nnoremap <silent><M-1> :CocCommand explorer<CR>
+		else
+			nnoremap <silent>1 :CocCommand explorer<CR>
+		endif
+	endif
 
-	nmap <silent> [g <Plug>(coc-diagnostic-prev)
-	nmap <silent> ]g <Plug>(coc-diagnostic-next)
-	nmap <silent> gd <Plug>(coc-definition)
-	nmap <silent> gD <Plug>(coc-type-definition)
-	nmap <silent> gi <Plug>(coc-implementation)
-	nmap <silent> gr <Plug>(coc-references-used)
-	nmap <silent> gy :call CocActionAsync('jumpDefinition', v:false)<CR>
-	nmap <silent> gn <Plug>(coc-rename)
-
+	nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
+	nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+	nnoremap <silent> gd <Plug>(coc-definition)
+	nnoremap <silent> gD <Plug>(coc-type-definition)
+	nnoremap <silent> gi <Plug>(coc-implementation)
+	nnoremap <silent> gr <Plug>(coc-references-used)
+	nnoremap <silent> gy :call CocActionAsync('jumpDefinition', v:false)<CR>
+	nnoremap <silent> gn <Plug>(coc-rename)
 " Use K to show documentation in preview window.
 	nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -181,4 +193,17 @@ if has_key(g:plugs, 'vim-commentary')
 	silent! unmap gcu
 	map <Leader>/ <Plug>Commentary
 	map <Leader>// <Plug>CommentaryLine
+endif
+
+if has_key(g:plugs, 'todo-vim')
+	if has('mac') || has('macunix')
+		nnoremap <silent><D-3> :TODOToggle<CR>
+	elseif has('unix')
+		if has('gui_running')
+			nnoremap <silent><M-3> :TODOToggle<CR>
+		else
+			nnoremap <silent>3 :TODOToggle<CR>
+		endif
+	endif
+endif
 endif

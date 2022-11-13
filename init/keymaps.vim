@@ -39,4 +39,11 @@ cnoremap <expr> <C-d> (getcmdpos() == len(getcmdline()) + 1 ? '<C-d>' : '<Del>')
 if has('terminal')
 	nnoremap <M-0> :bo term<CR>
 	tnoremap <Esc> <C-w>:q!<CR>
+	if !has('gui_running')
+		nnoremap 0 :bo term<CR>
+	endif
+endif
+
+if !has('gui_running')
+	set <M-3>=\e3
 endif
