@@ -48,7 +48,7 @@ if has('win32') || has('win64') || has('win32unix')
 elseif has('mac') || has('macunix')
 		"set macligatures
 		"set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
-		set guifont=FiraCodeNerdFontComplete-Regular:h13
+		set guifont=FiraCodeNerdFontComplete-Regular:h16
 elseif has('unix')
 	set guifont=FiraCode\ Nerd\ Font\ 11
 endif
