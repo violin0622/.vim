@@ -18,8 +18,11 @@ def LoadScript(file: string)
 enddef
 
 LoadScript("init/basic.vim")
-LoadScript("init/config.vim")
+#LoadScript("init/config.vim")
 LoadScript("init/tabsize.vim")
 LoadScript("init/keymaps.vim")
 LoadScript("init/plugins.vim")
 LoadScript("init/style.vim")
+
+g:node_client_debug = 1
+$NODE_CLIENT_LOG_FILE = '~/Workspace/log'

@@ -49,7 +49,7 @@ endif
 # 终端下功能键设置
 #----------------------------------------------------------------------
 def KeyEscape(name: string, code: string)
-	if has('nvim') && has('gui_running')
+	if !has('nvim') && !has('gui_running')
 		exec "set " .. name .. "=\e" .. code
 	endif
 enddef

@@ -51,6 +51,9 @@ set clipboard^=unnamed
 # 允许未保存即切换 Buffer
 set hidden
 
+set updatetime=300
+
+set signcolumn=yes
 
 #----------------------------------------------------------------------
 # 搜索设置
@@ -97,9 +100,9 @@ endif
 # 语法高亮设置
 #----------------------------------------------------------------------
 
-if has('syntax')  
-	syntax enable 
-	syntax on 
+if has('syntax')
+	syntax enable
+	syntax on
 endif
 
 
@@ -123,7 +126,7 @@ set display=lastline
 set wildmenu
 
 # 延迟绘制（提升性能）
-set lazyredraw
+set nolazyredraw
 
 # 错误格式
 set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m

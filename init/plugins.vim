@@ -75,7 +75,7 @@ Plug 'tpope/vim-commentary'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
-"vim-easymotion configration"""""""""""""""""""""""
+"" vim-easymotion configration"""""""""""""""""""""""
 
 " disable all default mappings
 let g:EasyMotion_do_mapping = 0
@@ -119,29 +119,35 @@ let g:vista_executive_for = {
 	\ }
 
 let g:vista_blink = [1,100]
-if has('mac') || has('macunix')
-	nmap <silent><D-2> :Vista!!<CR>
-elseif has('unix')
-	if has('gui_running')
-		nmap <silent><M-2> :Vista!!<CR>
-	else
-		nmap <silent>2 :Vista!!<CR>
-	endif
-endif
+" if has('mac') || has('macunix')
+" 	nmap <silent><D-2> :Vista!!<CR>
+" elseif has('unix')
+" 	if has('gui_running')
+" 		nmap <silent><M-2> :Vista!!<CR>
+" 	else
+" 		nmap <silent>2 :Vista!!<CR>
+" 	endif
+" endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 " Coc exlorer """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'coc.nvim')
 " window mappings
-	if has('mac') || has('macunix')
-		nmap <silent><D-1> :CocCommand explorer<CR>
-	elseif has('unix')
-		if has('gui_running')
-			nmap <silent><M-1> :CocCommand explorer<CR>
-		else
-			nmap <silent>1 :CocCommand explorer<CR>
-		endif
-	endif
+	" if has('mac') || has('macunix')
+	" 	nmap <silent><D-1> :CocCommand explorer<CR>
+	" elseif has('unix')
+	" 	if has('gui_running')
+	" 		nmap <silent><M-1> :CocCommand explorer<CR>
+	" 	else
+	" 		nmap <silent>1 :CocCommand explorer<CR>
+	" 	endif
+	" endif
+
+	inoremap <silent><expr> <TAB>
+		\ coc#pum#visible() ? coc#pum#next(1) :
+		\ CheckBackspace() ? '\<Tab>' :
+		\ coc#refresh()
+	inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : '\<C-h>'
 
 	nmap <silent> [g <Plug>(coc-diagnostic-prev)
 	nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -151,8 +157,10 @@ if has_key(g:plugs, 'coc.nvim')
 	nmap <silent> gr <Plug>(coc-references-used)
 	nmap <silent> gy :call CocActionAsync('jumpDefinition', v:false)<CR>
 	nmap <silent> gn <Plug>(coc-rename)
-" Use K to show documentation in preview window.
+	" Use K to show documentation in preview window.
 	nmap <silent> K :call <SID>show_documentation()<CR>
+	" Apply the most preferred quickfix action to fix diagnostic on the current line
+	nmap <leader>qf  <Plug>(coc-fix-current)
 
 	function! s:show_documentation()
 		if (index(['vim','help'], &filetype) >= 0)
@@ -163,18 +171,31 @@ if has_key(g:plugs, 'coc.nvim')
 			execute '!' . &keywordprg . " " . expand('<cword>')
 		endif
 	endfunction
+	function! CheckBackspace() abort
+	  let col = col('.') - 1
+	  return !col || getline('.')[col - 1]  =~# '\s'
+	endfunction
 
-	"" highlight symbol under the cursor.
+	" highlight symbol under the cursor.
 	autocmd CursorHold * silent call CocActionAsync('highlight')
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+	" Add `:Format` command to format current buffer
+	command! -nargs=0 Format :call CocActionAsync('format')
+
+	" Add `:Fold` command to fold current buffer
+	command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+	" Add `:OR` command for organize imports of the current buffer
+	command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim-Witch-Key """""""""""""""""""""""""""""""""""""""
+"" Vim-Witch-Key """""""""""""""""""""""""""""""""""""""
 autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" AirLine """""""""""""""""""""""""""""""""""""""
+"" AirLine """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'vim-airline')
 	let g:airline_experimental = 1
 	let g:airline_detect_iminsert=0
@@ -187,7 +208,7 @@ if has_key(g:plugs, 'vim-airline')
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-" Commentary """""""""""""""""""""""""""""""""""""""
+"" Commentary """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'vim-commentary')
 	silent! unmap gc
 	silent! unmap gcc
