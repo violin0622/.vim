@@ -12,7 +12,7 @@ vim9script
 #----------------------------------------------------------------------
 # 有 tmux 何没有的功能键超时（毫秒）
 #----------------------------------------------------------------------
-#
+
 if $TMUX != ''
 	set ttimeoutlen=30
 elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
@@ -25,38 +25,32 @@ endif
 # 记得设置 ttimeout （见 init-basic.vim） 和 ttimeoutlen （上面）
 #----------------------------------------------------------------------
 
-#if !has('nvim') && !has('gui_running')
-#	def Metacode(key: string)
-#		exec "set <M-" .. key .. ">=\e" .. key
-#	enddef
-#	for i in range(10)
-#		call Metacode(nr2char(char2nr('0') + i))
-#	endfor
-#	for i in range(26)
-#		call Metacode(nr2char(char2nr('a') + i))
-#		call Metacode(nr2char(char2nr('A') + i))
-#	endfor
-#	for c in [',', '.', '/', ';', '{', '}']
-#		call Metacode(c)
-#	endfor
-#	for c in ['?', ':', '-', '_', '+', '=', "'"]
-#		call Metacode(c)
-#	endfor
-#endif
-
-
+# def g:Metacode(key: string)
+# 	exec 'set <M-' .. key .. '>=\e' .. key
+# enddef
+if !has('nvim') && !has('gui_running')
+	def Metacode(key: string)
+		exec "set <M-" .. key .. ">=\e" .. key
+	enddef
+	for i in range(10)
+		Metacode(nr2char(char2nr('0') + i))
+	endfor
+	for i in range(26)
+		Metacode(nr2char(char2nr('a') + i))
+	endfor
+	for c in [',', '.', '/', ';', "'", '-', '=']
+		Metacode(c)
+	endfor
+endif
 #----------------------------------------------------------------------
-# 终端下功能键设置
+# 功能键终端码矫正
 #----------------------------------------------------------------------
+
 def KeyEscape(name: string, code: string)
 	if !has('nvim') && !has('gui_running')
 		exec "set " .. name .. "=\e" .. code
 	endif
 enddef
-
-#----------------------------------------------------------------------
-# 功能键终端码矫正
-#----------------------------------------------------------------------
 
 KeyEscape('<F1>', 'OP')
 KeyEscape('<F2>', 'OQ')
@@ -74,7 +68,6 @@ KeyEscape('<S-F9>', '[20;2~')
 KeyEscape('<S-F10>', '[21;2~')
 KeyEscape('<S-F11>', '[23;2~')
 KeyEscape('<S-F12>', '[24;2~')
-
 
 #----------------------------------------------------------------------
 # 防止tmux下vim的背景色显示异常

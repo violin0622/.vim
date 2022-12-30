@@ -3,7 +3,7 @@ vim9script
 #
 # init-basic.vim - 基础配置，该配置需要兼容 vim tiny 模式
 #
-# 所有人都能接受的配置，不掺渣任何 keymap, 和偏好设置
+# 所有人都能接受的配置，不掺杂任何 keymap, 和偏好设置
 #
 # Created by skywind on 2018/05/30
 # Last Modified: 2018/05/30 16:53:18
@@ -53,8 +53,6 @@ set hidden
 
 set updatetime=300
 
-set signcolumn=yes
-
 #----------------------------------------------------------------------
 # 搜索设置
 #----------------------------------------------------------------------
@@ -86,7 +84,6 @@ if has('multi_byte')
 	set fileencodings=ucs-bom,utf-8,gbk,gb18030,big5,euc-jp,latin1
 endif
 
-
 #----------------------------------------------------------------------
 # 允许 Vim 自带脚本根据文件类型自动设置缩进等
 #----------------------------------------------------------------------
@@ -94,7 +91,6 @@ endif
 if has('autocmd')
 	filetype plugin indent on
 endif
-
 
 #----------------------------------------------------------------------
 # 语法高亮设置
@@ -131,12 +127,6 @@ set nolazyredraw
 # 错误格式
 set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m
 
-# 设置分隔符可视
-set listchars=tab:│\ ,leadmultispace:\|\ \ \ ,trail:·,extends:>,precedes:<
-
-# 窗口分割符
-set fillchars+=vert:‖
-
 # 设置 tags：当前文件所在目录往上向根目录搜索直到碰到 .tags 文件
 # 或者 Vim 当前目录包含 .tags 文件
 set tags=./.tags;,.tags
@@ -145,11 +135,8 @@ set tags=./.tags;,.tags
 # 合并两行中文时，不在中间加空格
 set formatoptions+=mB
 
-#set formatoptions+=B
-
 # 文件换行符，默认使用 unix 换行符
 set fileformats=unix,dos,mac
-
 
 #----------------------------------------------------------------------
 # 设置代码折叠
@@ -165,10 +152,10 @@ if has('folding')
 	set foldlevel=99
 endif
 
-
 #----------------------------------------------------------------------
 # 文件搜索和补全时忽略下面扩展名
 #----------------------------------------------------------------------
+
 set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.pyc,.pyo,.egg-info,.class
 
 set wildignore=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib

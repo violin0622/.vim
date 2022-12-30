@@ -1,92 +1,92 @@
-if has('win32') || has('win64') || has('win32unix')
-	let plug_position = '$VIM/vimfiles/plugs'
-	let plug_copy_command = 'copy "'.$VIM.'\vimfiles\plugs\vim-plug\plug.vim" "'.$VIM.'\vimfiles\autoload\"'
-elseif has('unix') || has('mac') || has ('macunix')
-	let plug_position = '~/.vim/plugs'
-	let plug_copy_command = 'cp ~/.vim/plugs/vim-plug/plug.vim ~/.vim/autoload/'
+vim9script
+
+#if has('win32') || has('win64') || has('win32unix')
+var plug_pos = ''
+if g:vprof[g:Win]
+	plug_pos = '$VIM/vimfiles/plugs'
+	# var plug_copy_command = 'copy "'.$VIM.'\vimfiles\plugs\vim-plug\plug.vim" "'.$VIM.'\vimfiles\autoload\"'
+#elseif has('unix') || has('mac') || has('macunix')
+elseif g:vprof[g:Unix] || g:vprof[g:Mac]
+	plug_pos = '~/.vim/plugs'
+	# var plug_copy_command = 'cp ~/.vim/plugs/vim-plug/plug.vim ~/.vim/autoload/'
 endif
 
-" automatically install Plug.vim
+# automatically install Plug.vim
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
 		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-call plug#begin(plug_position)
-"Plug 'junegunn/vim-plug',{'do': plug_copy_command}
-
-" Language support """"""""""""""""""""""""""
-"Plug 'sheerun/vim-polyglot'
-
-" Chinese Document""""""""""""""""""""""""""""
+plug#begin(plug_pos)
+# Chinese Document""""""""""""""""""""""""""""
 Plug 'yianwillis/vimcdoc'
 
-" Key mapping suggestion
+# Key mapping suggestion
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
-"colorschemes""""""""""""""""""""
+#colorschemes""""""""""""""""""""
 Plug 'crusoexia/vim-monokai'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'joshdick/onedark.vim'
 
-" status line""""""""""""""""""""
+# status line""""""""""""""""""""
 Plug 'vim-airline/vim-airline'
 
-" Markdown""""""""""""""""""""
+# Markdown""""""""""""""""""""
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-" aligin""""""""""""""""""""""
+# aligin""""""""""""""""""""""
 Plug 'junegunn/vim-easy-align'
 
-"Plug 'wakatime/vim-wakatime'
+#Plug 'wakatime/vim-wakatime'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 
-" start up""""""""""""""""""""
+# start up""""""""""""""""""""
 Plug 'mhinz/vim-startify'
 
-" popup window""""""""""""""""""""
+# popup window""""""""""""""""""""
 Plug 'skywind3000/vim-quickui'
 
-" fuzzy finder""""""""""""""""""""
+# fuzzy finder""""""""""""""""""""
 Plug 'liuchengxu/vim-clap'
 
-" buffer manage""""""""""""""""""""
+# buffer manage""""""""""""""""""""
 Plug 'Asheq/close-buffers.vim'
 
-" smooth scrolling"""""""""""""""""
-"Plug 'psliwka/vim-smoothie'
+# smooth scrolling"""""""""""""""""
+#Plug 'psliwka/vim-smoothie'
 
-"code enhance""""""""""""""""""""
+#code enhance""""""""""""""""""""
 Plug 'Dimercel/todo-vim'
 
-" outliner
+# outliner
 Plug 'liuchengxu/vista.vim'
 
-"completion and lsp support
+#completion and lsp support
 Plug 'neoclide/coc.nvim', {'branch':'release'}
 
-"comment
+#comment
 Plug 'tpope/vim-commentary'
 
-call plug#end()
+plug#end()
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-"" vim-easymotion configration"""""""""""""""""""""""
+#""""""""""""""""""""""""""""""""""""""""""""""""""
+#" vim-easymotion configration"""""""""""""""""""""""
 
-" disable all default mappings
-let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ:;'
-let g:EasyMotion_startofline = 0
+# disable all default mappings
+g:EasyMotion_do_mapping = 0
+g:EasyMotion_smartcase = 1
+g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ:;'
+g:EasyMotion_startofline = 0
 
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
-"map <Leader>w <Plug>(easymotion-w)
-"map <Leader>e <Plug>(easymotion-e)
+#map <Leader>w <Plug>(easymotion-w)
+#map <Leader>e <Plug>(easymotion-e)
 map <Leader>w <Plug>(easymotion-w)
 map <Leader>W <Plug>(easymotion-W)
 map <Leader>b <Plug>(easymotion-b)
@@ -106,46 +106,43 @@ map <Leader>; <Plug>(easymotion-next)
 map <Leader>, <Plug>(easymotion-prev)
 nmap <Leader><Leader>j <Plug>(easymotion-overwin-line)
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vista """""""""""""""""""""""""""""""""""""""""""
-let g:vista_default_executive = 'coc'
+#""""""""""""""""""""""""""""""""""""""""""""""""""
+# Vista """""""""""""""""""""""""""""""""""""""""""
+g:vista_default_executive = 'coc'
 
-" Set the executive for some filetypes explicitly. Use the explicit executive
-" instead of the default one for these filetypes when using `:Vista` without
-" specifying the executive.
-let g:vista_executive_for = {
-	\ 'markdown': 'toc',
-	\ 'go': 'coc',
-	\ }
+# Set the executive for some filetypes explicitly. Use the explicit executive
+# instead of the default one for these filetypes when using `:Vista` without
+# specifying the executive.
+g:vista_executive_for = {
+'markdown': 'toc',
+'go': 'coc',
+}
 
-let g:vista_blink = [1,100]
-" if has('mac') || has('macunix')
-" 	nmap <silent><D-2> :Vista!!<CR>
-" elseif has('unix')
-" 	if has('gui_running')
-" 		nmap <silent><M-2> :Vista!!<CR>
-" 	else
-" 		nmap <silent>2 :Vista!!<CR>
-" 	endif
-" endif
+g:vista_blink = [1, 100]
+# if has('mac') || has('macunix')
+# 	nmap <silent><D-2> :Vista!!<CR>
+# elseif has('unix')
+# 	if has('gui_running')
+# 		nmap <silent><M-2> :Vista!!<CR>
+# 	else
+# 		nmap <silent>2 :Vista!!<CR>
+# 	endif
+# endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Coc exlorer """""""""""""""""""""""""""""""""""""""
+#""""""""""""""""""""""""""""""""""""""""""""""""""""
+# Coc exlorer """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'coc.nvim')
-" window mappings
-	" if has('mac') || has('macunix')
-	" 	nmap <silent><D-1> :CocCommand explorer<CR>
-	" elseif has('unix')
-	" 	if has('gui_running')
-	" 		nmap <silent><M-1> :CocCommand explorer<CR>
-	" 	else
-	" 		nmap <silent>1 :CocCommand explorer<CR>
-	" 	endif
-	" endif
+# window mappings
+
+	if g:vprof[g:Mac]
+		nmap <silent><D-1> :CocCommand explorer<CR>
+	else
+		nmap <silent><M-1> :CocCommand explorer<CR>
+	endif
 
 	inoremap <silent><expr> <TAB>
 		\ coc#pum#visible() ? coc#pum#next(1) :
-		\ CheckBackspace() ? '\<Tab>' :
+		\ CheckBackspace() ? '<Tab>' :
 		\ coc#refresh()
 	inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : '\<C-h>'
 
@@ -157,58 +154,74 @@ if has_key(g:plugs, 'coc.nvim')
 	nmap <silent> gr <Plug>(coc-references-used)
 	nmap <silent> gy :call CocActionAsync('jumpDefinition', v:false)<CR>
 	nmap <silent> gn <Plug>(coc-rename)
-	" Use K to show documentation in preview window.
-	nmap <silent> K :call <SID>show_documentation()<CR>
-	" Apply the most preferred quickfix action to fix diagnostic on the current line
+	# Use K to show documentation in preview window.
+	nmap <silent> K :call <SID>ShowDocument()<CR>
+	# Apply the most preferred quickfix action to fix diagnostic on the current line
 	nmap <leader>qf  <Plug>(coc-fix-current)
 
-	function! s:show_documentation()
-		if (index(['vim','help'], &filetype) >= 0)
-			execute 'h '.expand('<cword>')
-		elseif (coc#rpc#ready())
-			call CocActionAsync('doHover')
+	def ShowDocument()
+		if index(['vim', 'help'], &filetype) >= 0
+			execute 'h ' .. expand('<cword>')
+		elseif coc#rpc#ready()
+			leg call CocActionAsync('doHover')
 		else
-			execute '!' . &keywordprg . " " . expand('<cword>')
+			execute '!' .. &keywordprg .. " " .. expand('<cword>')
 		endif
-	endfunction
-	function! CheckBackspace() abort
-	  let col = col('.') - 1
-	  return !col || getline('.')[col - 1]  =~# '\s'
-	endfunction
+	enddef
 
-	" highlight symbol under the cursor.
+	#function! s:show_documentation()
+	#	if (index(['vim','help'], &filetype) >= 0)
+	#		execute 'h '.expand('<cword>')
+	#	elseif (coc#rpc#ready())
+	#		call CocActionAsync('doHover')
+	#	else
+	#		execute '!' . &keywordprg . " " . expand('<cword>')
+	#	endif
+	#endfunction
+
+	def CheckBackspace(): bool
+		var col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~# '\s'
+	enddef
+
+	#function! CheckBackspace() abort
+	#  let col = col('.') - 1
+	#  return !col || getline('.')[col - 1]  =~# '\s'
+	#endfunction
+
+	# highlight symbol under the cursor.
 	autocmd CursorHold * silent call CocActionAsync('highlight')
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-	" Add `:Format` command to format current buffer
+	# Add `:Format` command to format current buffer
 	command! -nargs=0 Format :call CocActionAsync('format')
 
-	" Add `:Fold` command to fold current buffer
+	# Add `:Fold` command to fold current buffer
 	command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-	" Add `:OR` command for organize imports of the current buffer
+	# Add `:OR` command for organize imports of the current buffer
 	command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Vim-Witch-Key """""""""""""""""""""""""""""""""""""""
+#""""""""""""""""""""""""""""""""""""""""""""""""""""
+#" Vim-Witch-Key """""""""""""""""""""""""""""""""""""""
 autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" AirLine """""""""""""""""""""""""""""""""""""""
+#""""""""""""""""""""""""""""""""""""""""""""""""""""
+#" AirLine """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'vim-airline')
-	let g:airline_experimental = 1
-	let g:airline_detect_iminsert=0
-	let g:airline_exclude_preview = 0
-	let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-	let g:airline_stl_path_style = 'short'
-	let g:airline_left_sep = ''
-	let g:airline_right_sep = ''
-	let g:airline#extensions#tabline#fnamemod = ':p:.'
+	g:airline_experimental = 1
+	g:airline_detect_iminsert = 0
+	g:airline_exclude_preview = 0
+	g:airline#parts#ffenc#skip_expected_string = 'utf-8[unix]'
+	g:airline_stl_path_style = 'short'
+	g:airline_left_sep = ''
+	g:airline_right_sep = ''
+	g:airline#extensions#tabline#fnamemod = ':p:.'
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Commentary """""""""""""""""""""""""""""""""""""""
+#""""""""""""""""""""""""""""""""""""""""""""""""""""
+#" Commentary """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'vim-commentary')
 	silent! unmap gc
 	silent! unmap gcc
