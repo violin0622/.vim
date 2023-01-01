@@ -15,7 +15,7 @@ g:vprof = {
 if has('win32') || has('win64') || has('win32unix')
 	g:vprof[g:Win] = 1
 elseif has('unix')
-	g:vprof[g:Mac] = 1
+	g:vprof[g:Unix] = 1
 elseif has('mac') || has('macunix')
 	g:vprof[g:Mac] = 1
 endif
@@ -46,3 +46,5 @@ LoadScript("init/keymaps.vim")
 LoadScript("init/config.vim")
 LoadScript("init/plugins.vim")
 LoadScript("init/style.vim")
+
+
