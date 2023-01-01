@@ -13,11 +13,11 @@ vim9script
 # 有 tmux 何没有的功能键超时（毫秒）
 #----------------------------------------------------------------------
 
-if $TMUX != ''
-	set ttimeoutlen=30
-elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
-	set ttimeoutlen=80
-endif
+#if $TMUX != ''
+#	set ttimeoutlen=30
+#elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
+#	set ttimeoutlen=80
+#endif
 
 
 #----------------------------------------------------------------------
@@ -28,20 +28,20 @@ endif
 # def g:Metacode(key: string)
 # 	exec 'set <M-' .. key .. '>=\e' .. key
 # enddef
-if !has('nvim') && !has('gui_running')
-	def Metacode(key: string)
-		exec "set <M-" .. key .. ">=\e" .. key
-	enddef
-	for i in range(10)
-		Metacode(nr2char(char2nr('0') + i))
-	endfor
-	for i in range(26)
-		Metacode(nr2char(char2nr('a') + i))
-	endfor
-	for c in [',', '.', '/', ';', "'", '-', '=']
-		Metacode(c)
-	endfor
-endif
+#if !has('nvim') && !has('gui_running')
+#	def Metacode(key: string)
+#		exec "set <M-" .. key .. ">=\e" .. key
+#	enddef
+#	for i in range(10)
+#		Metacode(nr2char(char2nr('0') + i))
+#	endfor
+#	for i in range(26)
+#		Metacode(nr2char(char2nr('a') + i))
+#	endfor
+#	for c in [',', '.', '/', ';', "'", '-', '=']
+#		Metacode(c)
+#	endfor
+#endif
 #----------------------------------------------------------------------
 # 功能键终端码矫正
 #----------------------------------------------------------------------
@@ -52,22 +52,22 @@ def KeyEscape(name: string, code: string)
 	endif
 enddef
 
-KeyEscape('<F1>', 'OP')
-KeyEscape('<F2>', 'OQ')
-KeyEscape('<F3>', 'OR')
-KeyEscape('<F4>', 'OS')
-KeyEscape('<S-F1>', '[1;2P')
-KeyEscape('<S-F2>', '[1;2Q')
-KeyEscape('<S-F3>', '[1;2R')
-KeyEscape('<S-F4>', '[1;2S')
-KeyEscape('<S-F5>', '[15;2~')
-KeyEscape('<S-F6>', '[17;2~')
-KeyEscape('<S-F7>', '[18;2~')
-KeyEscape('<S-F8>', '[19;2~')
-KeyEscape('<S-F9>', '[20;2~')
-KeyEscape('<S-F10>', '[21;2~')
-KeyEscape('<S-F11>', '[23;2~')
-KeyEscape('<S-F12>', '[24;2~')
+#KeyEscape('<F1>', 'OP')
+#KeyEscape('<F2>', 'OQ')
+#KeyEscape('<F3>', 'OR')
+#KeyEscape('<F4>', 'OS')
+#KeyEscape('<S-F1>', '[1;2P')
+#KeyEscape('<S-F2>', '[1;2Q')
+#KeyEscape('<S-F3>', '[1;2R')
+#KeyEscape('<S-F4>', '[1;2S')
+#KeyEscape('<S-F5>', '[15;2~')
+#KeyEscape('<S-F6>', '[17;2~')
+#KeyEscape('<S-F7>', '[18;2~')
+#KeyEscape('<S-F8>', '[19;2~')
+#KeyEscape('<S-F9>', '[20;2~')
+#KeyEscape('<S-F10>', '[21;2~')
+#KeyEscape('<S-F11>', '[23;2~')
+#KeyEscape('<S-F12>', '[24;2~')
 
 #----------------------------------------------------------------------
 # 防止tmux下vim的背景色显示异常

@@ -40,7 +40,7 @@ set nowrap
 set ttimeout
 
 # 功能键超时检测 50 毫秒
-set ttimeoutlen=50
+#set ttimeoutlen=50
 
 # 显示光标位置
 set ruler
