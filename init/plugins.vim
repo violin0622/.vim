@@ -108,17 +108,23 @@ nmap <Leader><Leader>j <Plug>(easymotion-overwin-line)
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""
 # Vista """""""""""""""""""""""""""""""""""""""""""
-g:vista_default_executive = 'coc'
+if has_key(g:plugs, 'vista.vim')
+	g:vista_default_executive = 'coc'
 
-# Set the executive for some filetypes explicitly. Use the explicit executive
-# instead of the default one for these filetypes when using `:Vista` without
-# specifying the executive.
-g:vista_executive_for = {
-'markdown': 'toc',
-'go': 'coc',
-}
+	# Set the executive for some filetypes explicitly. Use the explicit executive
+	# instead of the default one for these filetypes when using `:Vista` without
+	# specifying the executive.
+	g:vista_executive_for = {
+		'markdown': 'toc',
+		'go': 'coc',
+	}
 
-g:vista_blink = [1, 100]
+	g:vista_blink = [1, 100]
+	if g:vprof[g:Mac]
+		nmap <silent><D-2> :Vista!!<CR>
+	else
+		nmap <silent><M-2> :Vista!!<CR>
+	endif
 # if has('mac') || has('macunix')
 # 	nmap <silent><D-2> :Vista!!<CR>
 # elseif has('unix')
@@ -128,7 +134,7 @@ g:vista_blink = [1, 100]
 # 		nmap <silent>2 :Vista!!<CR>
 # 	endif
 # endif
-
+endif
 #""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Coc exlorer """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'coc.nvim')
