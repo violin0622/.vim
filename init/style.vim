@@ -58,7 +58,9 @@ elseif has('mac') || has('macunix')
 	#set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
 	set guifont=FiraCodeNerdFontComplete-Regular:h16
 elseif has('unix')
-	set guifont=FiraCode\ Nerd\ Font\ 11
+	# set guifont=FiraCode\ Nerd\ Font\ 11
+	set guifont=JetBrainsMono\ Nerd\ Font\ 11
+	# set guifont=VictorMono\ Nerd\ Font\ 11
 endif
 
 # 设置连字显示
@@ -161,6 +163,7 @@ elseif g:colors_name == 'dessert'
 	hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
 endif
 
+hi CocInlayHint guifg=#5a6278 guibg=#1d242e
 
 #----------------------------------------------------------------------
 # 终端设置，隐藏行号和侧边栏
@@ -305,11 +308,11 @@ enddef
 # 标签栏最终设置
 #----------------------------------------------------------------------
 
-set tabline=%!Vim_NeatTabLine()
-if has('gui_running')
-	set guitablabel=%{Vim_NeatGuiTabLabel()}
-	set guitabtooltip=%{Vim_NeatGuiTabTip()}
-endif
+# set tabline=%!Vim_NeatTabLine()
+# if has('gui_running')
+# 	set guitablabel=%{Vim_NeatGuiTabLabel()}
+# 	set guitabtooltip=%{Vim_NeatGuiTabTip()}
+# endif
 
 #----------------------------------------------------------------------
 # 光标显示设置
