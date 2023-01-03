@@ -23,12 +23,11 @@ Plug 'yianwillis/vimcdoc'
 
 # Key mapping suggestion
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
-
-#colorschemes""""""""""""""""""""
 Plug 'crusoexia/vim-monokai'
-Plug 'altercation/vim-colors-solarized'
+#Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'joshdick/onedark.vim'
+Plug 'lifepillar/vim-solarized8'
 
 # status line""""""""""""""""""""
 Plug 'vim-airline/vim-airline'
@@ -246,4 +245,10 @@ if has_key(g:plugs, 'todo-vim')
 			nnoremap <silent>3 :TODOToggle<CR>
 		endif
 	endif
+endif
+
+#"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+# OneDark """"""""""""""""""""""""""""""""""""""""""""""""""
+if has_key(g:plugs, 'onedark.vim')
+	g:onedark_terminal_italics = 1
 endif
