@@ -54,17 +54,20 @@ set fillchars+=vert:\
 if has('win32') || has('win64') || has('win32unix')
 	set guifont=Consolas:h12	# 设置字体字号
 elseif has('mac') || has('macunix')
-	#set macligatures
-	#set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
-	set guifont=FiraCodeNerdFontComplete-Regular:h16
+	set macligatures
+
+	# set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
+	# set guifont=FiraCodeNerdFontComplete-Regular:h16
+	set guifont=JetBrainsMonoNerdFontComplete-Regular:h13
 elseif has('unix')
+	# 设置连字显示
+	set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
+
 	# set guifont=FiraCode\ Nerd\ Font\ 11
 	set guifont=JetBrainsMono\ Nerd\ Font\ 11
 	# set guifont=VictorMono\ Nerd\ Font\ 11
 endif
 
-# 设置连字显示
-set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
 
 #----------------------------------------------------------------------
 # 颜色主题：色彩文件位于 colors 目录中

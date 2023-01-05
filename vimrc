@@ -14,10 +14,10 @@ g:vprof = {
 }
 if has('win32') || has('win64') || has('win32unix')
 	g:vprof[g:Win] = 1
-elseif has('unix')
-	g:vprof[g:Unix] = 1
 elseif has('mac') || has('macunix')
 	g:vprof[g:Mac] = 1
+elseif has('linux') || has('unix')
+	g:vprof[g:Unix] = 1
 endif
 if has('gui_running')
 	g:vprof[g:GUI] = 1
@@ -30,6 +30,10 @@ if get(s:, 'loaded', 0)
 	finish
 else
 	var loaded = 1
+endif
+
+if g:vprof[g:Mac] && g:vprof[g:GUI]
+	set shell=/bin/zsh\ -i
 endif
 
 # 取得本文件所在的目录

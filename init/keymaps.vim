@@ -35,10 +35,18 @@ cnoremap <C-k> <C-\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<CR>
 # 光标在行末时补全，在中间时删除右侧字符
 cnoremap <expr> <C-d> (getcmdpos() == len(getcmdline()) + 1 ? '<C-d>' : '<Del>')
 
-if has('terminal')
-	if has('unix')
-		nnoremap <M-0> :bo term<CR>
-	elseif has('mac') || has('macunix')
-		nnoremap <D-0> :bo term<CR>
-	endif
-endif
+# if g:vprof[g:Mac]
+# 	nnoremap <D-0> :bo term<CR>
+# 	tnoremap <D-0> exit<CR>
+# else
+	nnoremap <M-0> :bo term<CR>
+	tnoremap <M-0> exit<CR>
+# endif
+
+# if has('terminal')
+# 	if has('unix')
+# 		nnoremap <M-0> :bo term<CR>
+# 	elseif has('mac') || has('macunix')
+# 		nnoremap <D-0> :bo term<CR>
+# 	endif
+# endif
