@@ -12,6 +12,7 @@ g:vprof = {
 '__gui__': 0,
 '__term__': 0,
 }
+
 if has('win32') || has('win64') || has('win32unix')
 	g:vprof[g:Win] = 1
 elseif has('mac') || has('macunix')

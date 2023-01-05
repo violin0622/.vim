@@ -119,11 +119,11 @@ if has_key(g:plugs, 'vista.vim')
 	}
 
 	g:vista_blink = [1, 100]
-	if g:vprof[g:Mac]
-		nmap <silent><D-2> :Vista!!<CR>
-	else
-		nmap <silent><M-2> :Vista!!<CR>
-	endif
+	# if g:vprof[g:Mac]
+	# 	nmap <silent><D-2> :Vista!!<CR>
+	# else
+		nmap <silent><M-2> <Cmd>Vista!!<CR>
+	# endif
 # if has('mac') || has('macunix')
 # 	nmap <silent><D-2> :Vista!!<CR>
 # elseif has('unix')
@@ -139,11 +139,11 @@ endif
 if has_key(g:plugs, 'coc.nvim')
 # window mappings
 
-	if g:vprof[g:Mac]
-		nmap <silent><D-1> :CocCommand explorer<CR>
-	else
-		nmap <silent><M-1> :CocCommand explorer<CR>
-	endif
+	# if g:vprof[g:Mac]
+		# nmap <silent><D-1> :CocCommand explorer<CR>
+	# else
+		nmap <silent><M-1> <Cmd>CocCommand explorer<CR>
+	# endif
 
 	inoremap <silent><expr> <TAB>
 		\ coc#pum#visible() ? coc#pum#next(1) :
@@ -235,16 +235,10 @@ if has_key(g:plugs, 'vim-commentary')
 	map <Leader>// <Plug>CommentaryLine
 endif
 
+#""""""""""""""""""""""""""""""""""""""""""""""""""""
+# Todo """"""""""""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'todo-vim')
-	if has('mac') || has('macunix')
-		nnoremap <silent><D-3> :TODOToggle<CR>
-	elseif has('unix')
-		if has('gui_running')
-			nnoremap <silent><M-3> :TODOToggle<CR>
-		else
-			nnoremap <silent>3 :TODOToggle<CR>
-		endif
-	endif
+	nnoremap <silent><M-3> <Cmd>TODOToggle<CR>
 endif
 
 #"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

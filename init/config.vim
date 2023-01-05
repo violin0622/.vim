@@ -13,21 +13,38 @@ vim9script
 # 有 tmux 何没有的功能键超时（毫秒）
 #----------------------------------------------------------------------
 
-#if $TMUX != ''
-#	set ttimeoutlen=30
-#elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
-#	set ttimeoutlen=80
-#endif
+# 为映射和键码都启用超时
+set timeout ttimeout
 
+if $TMUX != ''
+	set ttimeoutlen=30
+elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
+	set ttimeoutlen=30
+endif
 
 #----------------------------------------------------------------------
-# 终端下允许 ALT，详见：http://www.skywind.me/blog/archives/2021
+# ALT 相关设置，详见：http://www.skywind.me/blog/archives/2021
 # 记得设置 ttimeout （见 init-basic.vim） 和 ttimeoutlen （上面）
 #----------------------------------------------------------------------
 
-# def g:Metacode(key: string)
-# 	exec 'set <M-' .. key .. '>=\e' .. key
-# enddef
+# MacVim GUI 开启 Option 键映射
+# 会自动将 <M-a> 这样的映射翻译为 å，
+# 因此在插入模式下依然可以用 Option 组合键输入 UTF-8 字符。
+if g:vprof[g:Mac] && g:vprof[g:GUI]
+	set macmeta
+endif
+
+if g:vprof[g:Mac] && g:vprof[g:Term] && !has('nvim')
+	def Metacode(key: string)
+		exec "set <M-" .. key .. ">=\e" .. key
+	enddef
+	for i in range(10)
+		Metacode(nr2char(char2nr('0') + i))
+	endfor
+	for i in range(26)
+		Metacode(nr2char(char2nr('a') + i))
+	endfor
+endif
 #if !has('nvim') && !has('gui_running')
 #	def Metacode(key: string)
 #		exec "set <M-" .. key .. ">=\e" .. key
@@ -42,6 +59,7 @@ vim9script
 #		Metacode(c)
 #	endfor
 #endif
+
 #----------------------------------------------------------------------
 # 功能键终端码矫正
 #----------------------------------------------------------------------
