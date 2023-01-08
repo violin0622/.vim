@@ -39,7 +39,7 @@ cnoremap <expr> <C-d> (getcmdpos() == len(getcmdline()) + 1 ? '<C-d>' : '<Del>')
 # 	nnoremap <D-0> :bo term<CR>
 # 	tnoremap <D-0> exit<CR>
 # else
-	nnoremap <M-0> :bo term<CR>
+	nnoremap <M-0> <Cmd>bo term<CR>
 	tnoremap <M-0> exit<CR>
 # endif
 

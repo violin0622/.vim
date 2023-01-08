@@ -34,7 +34,7 @@ if g:vprof[g:Mac] && g:vprof[g:GUI]
 	set macmeta
 endif
 
-if g:vprof[g:Mac] && g:vprof[g:Term] && !has('nvim')
+# if g:vprof[g:Mac] && g:vprof[g:Term] && !has('nvim')
 	def Metacode(key: string)
 		exec "set <M-" .. key .. ">=\e" .. key
 	enddef
@@ -44,7 +44,7 @@ if g:vprof[g:Mac] && g:vprof[g:Term] && !has('nvim')
 	for i in range(26)
 		Metacode(nr2char(char2nr('a') + i))
 	endfor
-endif
+# endif
 #if !has('nvim') && !has('gui_running')
 #	def Metacode(key: string)
 #		exec "set <M-" .. key .. ">=\e" .. key
