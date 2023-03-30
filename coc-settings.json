@@ -1,11 +1,6 @@
 {
   "languageserver": {
-    "golang": {
-      "command": "gopls"
-      ,"rootPatterns": ["go.mod"]
-      ,"filetypes": ["go"]
-    }
-    ,"clangd": {
+    "clangd": {
       "command": "clangd",
       "rootPatterns": [".git/", "compile_flags.txt", "compile_commands.json"],
       "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
@@ -36,7 +31,10 @@
   }
 
 
-  ,"rust-analyzer.server.path": "/usr/bin/rust-analyzer"
+  ,"rust-analyzer.server.path": "$HOME/.cargo/bin/rust-analyzer"
   ,"rust-analyzer.cargo.buildScripts.enable": true
 
+  ,"go.goplsOptions": {
+    "local": "git.garena.com"
+  }
 }

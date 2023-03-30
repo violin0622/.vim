@@ -51,8 +51,7 @@ Plug 'mhinz/vim-startify'
 Plug 'skywind3000/vim-quickui'
 
 # fuzzy finder""""""""""""""""""""
-Plug 'liuchengxu/vim-clap'
-
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 # buffer manage""""""""""""""""""""
 Plug 'Asheq/close-buffers.vim'
 
@@ -70,6 +69,12 @@ Plug 'neoclide/coc.nvim', {'branch':'release'}
 
 #comment
 Plug 'tpope/vim-commentary'
+
+# filetypes
+Plug 'solarnz/thrift.vim'
+Plug 'wfxr/protobuf.vim'
+
+Plug 'github/copilot.vim'
 
 plug#end()
 

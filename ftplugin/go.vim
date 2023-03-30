@@ -7,6 +7,7 @@ setl colorcolumn=80
 setl formatoptions=Bmcroql
 
 if has_key(g:plugs, 'coc.nvim')
-  "autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
-  "autocmd BufWritePre *.go :silent call CocAction('format')
+  " autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+  " autocmd BufWritePre *.go :silent call CocAction('runCommand', 'go.gopls.tidy')
+  autocmd BufWritePre *.go :silent call CocActionAsync('format')
 endif
