@@ -73,6 +73,10 @@ Plug 'tpope/vim-commentary'
 # filetypes
 Plug 'solarnz/thrift.vim'
 Plug 'wfxr/protobuf.vim'
+Plug 'florentc/vim-tla'
+
+# Spell Check
+Plug 'psliwka/vim-dirtytalk', { 'do': ':DirtytalkUpdate' }
 
 Plug 'github/copilot.vim'
 

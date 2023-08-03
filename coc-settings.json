@@ -1,5 +1,7 @@
 {
-  "languageserver": {
+  "coc.preferences.jumpCommand": "tab drop"
+
+  ,"languageserver": {
     "clangd": {
       "command": "clangd",
       "rootPatterns": [".git/", "compile_flags.txt", "compile_commands.json"],
@@ -21,20 +23,23 @@
       "filetypes": ["sh"]
     }
   }
-  ,"explorer.icon.enableNerdfont": true
-  ,"coc.preferences.jumpCommand": "tab drop"
-
-  ,"markdownlint.config": {
-    "default": true
-    ,"MD022": false
-    ,"MD024": false
-  }
-
 
   ,"rust-analyzer.server.path": "$HOME/.cargo/bin/rust-analyzer"
   ,"rust-analyzer.cargo.buildScripts.enable": true
+  ,"rust-analyzer.procMacro.enable": true
 
   ,"go.goplsOptions": {
     "local": "git.garena.com"
   }
+
+  ,"explorer.icon.enableNerdfont": true
+  ,"explorer.width": 27
+
+  ,"markdownlint.config": {
+    "default": true
+    ,"MD013": {"code_blocks": false, "tables":false}
+    ,"MD022": false
+    ,"MD024": false
+  }
+
 }

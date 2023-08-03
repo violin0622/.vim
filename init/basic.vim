@@ -112,8 +112,8 @@ set showmatch
 # 显示括号匹配的时间
 set matchtime=3
 
-# 匹配尖括号
-set matchpairs+=<:>
+# 匹配尖括号，汉字字符的括号和方引号
+set matchpairs+=<:>,（:）,「:」
 
 # 显示最后一行
 set display=lastline

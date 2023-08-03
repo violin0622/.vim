@@ -58,7 +58,7 @@ elseif has('mac') || has('macunix')
 
 	# set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
 	# set guifont=FiraCodeNerdFontComplete-Regular:h16
-	set guifont=JetBrainsMonoNerdFontComplete-Regular:h13
+	set guifont=JetBrainsMonoNF-Regular:h13
 elseif has('unix')
 	# 设置连字显示
 	set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
