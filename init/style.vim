@@ -164,9 +164,11 @@ elseif g:colors_name == 'dessert'
 	# 修正补全目录的色彩：默认太难看
 	hi! Pmenu guibg=gray guifg=black ctermbg=gray ctermfg=black
 	hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
+elseif g:colors_name == 'onedark'
+	# 将默认青色的 virtual text 设置为一个低调点的颜色
+	hi CocInlayHint guifg=#5F789A
 endif
 
-hi CocInlayHint guifg=#5a6278 guibg=#1d242e
 
 #----------------------------------------------------------------------
 # 终端设置，隐藏行号和侧边栏

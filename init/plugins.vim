@@ -1,4 +1,5 @@
 vim9script
+scriptencoding utf-8
 
 #if has('win32') || has('win64') || has('win32unix')
 var plug_pos = ''
@@ -67,6 +68,9 @@ Plug 'liuchengxu/vista.vim'
 #completion and lsp support
 Plug 'neoclide/coc.nvim', {'branch':'release'}
 
+# Interactive Debugger
+Plug 'puremourning/vimspector'
+
 #comment
 Plug 'tpope/vim-commentary'
 
@@ -83,42 +87,22 @@ Plug 'github/copilot.vim'
 plug#end()
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""
-#" vim-easymotion configration"""""""""""""""""""""""
+# Easymotion """"""""""""""""""""""""""""""""""""""
 
-# disable all default mappings
-g:EasyMotion_do_mapping = 0
-g:EasyMotion_smartcase = 1
-g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ:;'
-g:EasyMotion_startofline = 0
-
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-#map <Leader>w <Plug>(easymotion-w)
-#map <Leader>e <Plug>(easymotion-e)
-map <Leader>w <Plug>(easymotion-w)
-map <Leader>W <Plug>(easymotion-W)
-map <Leader>b <Plug>(easymotion-b)
-map <Leader>B <Plug>(easymotion-B)
-map <Leader>e <Plug>(easymotion-e)
-map <Leader>E <Plug>(easymotion-E)
-map <Leader>ge <Plug>(easymotion-ge)
-map <Leader>gE <Plug>(easymotion-gE)
-map <Leader>n <Plug>(easymotion-n)
-map <Leader>N <Plug>(easymotion-N)
-map <Leader>s <Plug>(easymotion-s)
-map <Leader>f <Plug>(easymotion-fl)
-map <Leader>F <Plug>(easymotion-Fl)
-map <Leader>t <Plug>(easymotion-tl)
-map <Leader>T <Plug>(easymotion-Tl)
-map <Leader>; <Plug>(easymotion-next)
-map <Leader>, <Plug>(easymotion-prev)
-nmap <Leader><Leader>j <Plug>(easymotion-overwin-line)
+if has_key(g:plugs, 'easymotion')
+	# disable all default mappings
+	g:EasyMotion_do_mapping = 0
+	g:EasyMotion_smartcase = 1
+	g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ:;'
+	g:EasyMotion_startofline = 0
+endif
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""
 # Vista """""""""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'vista.vim')
 	g:vista_default_executive = 'coc'
-
+	g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+	g:vista_blink = [1, 100]
 	# Set the executive for some filetypes explicitly. Use the explicit executive
 	# instead of the default one for these filetypes when using `:Vista` without
 	# specifying the executive.
@@ -127,81 +111,50 @@ if has_key(g:plugs, 'vista.vim')
 		'go': 'coc',
 	}
 
-	g:vista_blink = [1, 100]
-	# if g:vprof[g:Mac]
-	# 	nmap <silent><D-2> :Vista!!<CR>
-	# else
-		nmap <silent><M-2> <Cmd>Vista!!<CR>
-	# endif
-# if has('mac') || has('macunix')
-# 	nmap <silent><D-2> :Vista!!<CR>
-# elseif has('unix')
-# 	if has('gui_running')
-# 		nmap <silent><M-2> :Vista!!<CR>
-# 	else
-# 		nmap <silent>2 :Vista!!<CR>
-# 	endif
-# endif
+	# g:vista#renderer#icons = {
+    # 'var': "\uf0ae7",
+    # 'variable': "\uf0ae7",
+    # 'variables': "\uf0ae7",
+    # # 'const': "\uf0400",
+    # # 'constant': "\uf0400",
+    # 'constructor': "\uf0476",
+    # # 'method': "\uf01a7",
+    # 'package': "\uf03d3",
+    # 'packages': "\uf03d3",
+	# 'enum': "\uf0b0c",
+    # 'enumerator': "\uf0b0c",
+    # 'enummember': "\uf0bf8",
+    # 'module': "\uf1b3",
+    # 'modules': "\uf1b3",
+    # 'type': "\uf027a",
+    # 'typedef': "\uf027a",
+    # 'types': "\uf027a",
+    # 'field': "\ueb5f",
+    # 'fields': "\ueb5f",
+    # 'macro': "\uf8a3",
+    # 'macros': "\uf8a3",
+	# 'map': "\uf292",
+#    'class': "\uf0e8",
+#    'augroup': "\ufb44",
+#    'struct': "\uf318",
+#    'union': "\ufacd",
+#    'member': "\uf02b",
+#    'target': "\uf893",
+#    'property': "\ufab6",
+#    'interface': "\uf7fe",
+#    'namespace': "\uf475",
+#    'subroutine': "\uf9af",
+#    'implementation': "\uf776",
+#    'typeParameter': "\uf278",
+#    'default': "\uf29c"
+	# }
+
 endif
+
 #""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Coc exlorer """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'coc.nvim')
 # window mappings
-
-	# if g:vprof[g:Mac]
-		# nmap <silent><D-1> :CocCommand explorer<CR>
-	# else
-		nmap <silent><M-1> <Cmd>CocCommand explorer<CR>
-	# endif
-
-	inoremap <silent><expr> <TAB>
-		\ coc#pum#visible() ? coc#pum#next(1) :
-		\ CheckBackspace() ? '<Tab>' :
-		\ coc#refresh()
-	inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : '\<C-h>'
-
-	nmap <silent> [g <Plug>(coc-diagnostic-prev)
-	nmap <silent> ]g <Plug>(coc-diagnostic-next)
-	nmap <silent> gd <Plug>(coc-definition)
-	nmap <silent> gD <Plug>(coc-type-definition)
-	nmap <silent> gi <Plug>(coc-implementation)
-	nmap <silent> gr <Plug>(coc-references-used)
-	nmap <silent> gy :call CocActionAsync('jumpDefinition', v:false)<CR>
-	nmap <silent> gn <Plug>(coc-rename)
-	# Use K to show documentation in preview window.
-	nmap <silent> K :call <SID>ShowDocument()<CR>
-	# Apply the most preferred quickfix action to fix diagnostic on the current line
-	nmap <leader>qf  <Plug>(coc-fix-current)
-
-	def ShowDocument()
-		if index(['vim', 'help'], &filetype) >= 0
-			execute 'h ' .. expand('<cword>')
-		elseif coc#rpc#ready()
-			leg call CocActionAsync('doHover')
-		else
-			execute '!' .. &keywordprg .. " " .. expand('<cword>')
-		endif
-	enddef
-
-	#function! s:show_documentation()
-	#	if (index(['vim','help'], &filetype) >= 0)
-	#		execute 'h '.expand('<cword>')
-	#	elseif (coc#rpc#ready())
-	#		call CocActionAsync('doHover')
-	#	else
-	#		execute '!' . &keywordprg . " " . expand('<cword>')
-	#	endif
-	#endfunction
-
-	def CheckBackspace(): bool
-		var col = col('.') - 1
-		return !col || getline('.')[col - 1]  =~# '\s'
-	enddef
-
-	#function! CheckBackspace() abort
-	#  let col = col('.') - 1
-	#  return !col || getline('.')[col - 1]  =~# '\s'
-	#endfunction
 
 	# highlight symbol under the cursor.
 	autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -214,7 +167,7 @@ if has_key(g:plugs, 'coc.nvim')
 	command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 	# Add `:OR` command for organize imports of the current buffer
-	command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+	command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 endif
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -234,24 +187,11 @@ if has_key(g:plugs, 'vim-airline')
 	g:airline#extensions#tabline#fnamemod = ':p:.'
 endif
 
-#""""""""""""""""""""""""""""""""""""""""""""""""""""
-#" Commentary """""""""""""""""""""""""""""""""""""""
-if has_key(g:plugs, 'vim-commentary')
-	silent! unmap gc
-	silent! unmap gcc
-	silent! unmap gcu
-	map <Leader>/ <Plug>Commentary
-	map <Leader>// <Plug>CommentaryLine
-endif
-
-#""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Todo """"""""""""""""""""""""""""""""""""""""""""""
-if has_key(g:plugs, 'todo-vim')
-	nnoremap <silent><M-3> <Cmd>TODOToggle<CR>
-endif
-
 #"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # OneDark """"""""""""""""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'onedark.vim')
 	g:onedark_terminal_italics = 1
 endif
+
+# Vimspector """"""""""""""""""""""""""""""""""""""""""""""
+g:vimspector_enable_mappings = 'HUMAN'

@@ -47,9 +47,9 @@ enddef
 
 LoadScript("init/basic.vim")
 LoadScript("init/tabsize.vim")
-LoadScript("init/keymaps.vim")
 LoadScript("init/config.vim")
 LoadScript("init/plugins.vim")
+LoadScript("init/keymaps.vim")
 LoadScript("init/style.vim")
 
 
