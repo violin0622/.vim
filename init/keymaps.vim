@@ -4,6 +4,8 @@ noremap <CR> :
 
 nnoremap 0 ^
 nnoremap ^ 0
+vnoremap 0 ^
+vnoremap ^ 0
 
 #----------------------------------------------------------------------
 # 设置 CTRL+HJKL 移动光标（INSERT 模式偶尔需要移动的方便些）
@@ -35,7 +37,7 @@ cnoremap <C-k> <C-\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<CR>
 # 光标在行末时补全，在中间时删除右侧字符
 cnoremap <expr> <C-d> (getcmdpos() == len(getcmdline()) + 1 ? '<C-d>' : '<Del>')
 
-if g:vprof[g:Mac]
+if g:Mac
 	nnoremap <D-0> :bo term<CR>
 	tnoremap <D-0> exit<CR>
 else
@@ -49,7 +51,6 @@ endif
 
 # Coc.nvim -------------------- 
 if has_key(g:plugs, 'coc.nvim')
-	nmap <silent><M-1> <Cmd>CocCommand explorer<CR>
 	inoremap <silent><expr> <TAB>
 		\ coc#pum#visible() ? coc#pum#next(1) :
 		\ CheckBackspace() ? '<Tab>' :
@@ -68,6 +69,7 @@ if has_key(g:plugs, 'coc.nvim')
 	nmap <silent> K :call <SID>ShowDocument()<CR>
 	# Apply the most preferred quickfix action to fix diagnostic on the current line
 	nmap <leader>qf  <Plug>(coc-fix-current)
+	nmap <silent><M-1> <Cmd>CocCommand explorer<CR>
 
 	def ShowDocument()
 		if index(['vim', 'help'], &filetype) >= 0
@@ -110,7 +112,7 @@ if has_key(g:plugs, 'vimspector')
 endif
 
 # EasyMotion """"""""""""""""""""""""""""""""""""""""""""""
-if has_key(g:plugs, 'easymotion')
+if has_key(g:plugs, 'vim-easymotion')
 	map <Leader>j <Plug>(easymotion-j)
 	map <Leader>k <Plug>(easymotion-k)
 	#map <Leader>w <Plug>(easymotion-w)

@@ -37,16 +37,18 @@
   ,"go.goplsOptions": {
     "local": "git.garena.com"
     ,"semanticTokens": true
-    //,"hints": {
-    //  "assignVariableTypes" : true
-    //  ,"compositeLiteralFields" : true
-    //  ,"compositeLiteralTypes" : true
-    //  ,"constantValues" : true
-    //  ,"functionTypeParameters" : true
-    //  ,"parameterNames" : true
-    //  ,"rangeVariableTypes" : true
-    //}
+    ,"hints": {
+      "assignVariableTypes" : true
+      ,"compositeLiteralFields" : true
+      ,"compositeLiteralTypes" : true
+      ,"constantValues" : true
+      ,"functionTypeParameters" : true
+      ,"parameterNames" : true
+      ,"rangeVariableTypes" : true
+    }
   }
+
+  ,"java.jdt.ls.vmargs": "-javaagent:/Users/violin/.local/share/lombok/lombok-1.18.30.jar"
 
   ,"explorer.icon.enableNerdfont": true
   ,"explorer.width": 27

@@ -1,13 +1,11 @@
 vim9script
 scriptencoding utf-8
 
-#if has('win32') || has('win64') || has('win32unix')
 var plug_pos = ''
-if g:vprof[g:Win]
+if g:Win
 	plug_pos = '$VIM/vimfiles/plugs'
 	# var plug_copy_command = 'copy "'.$VIM.'\vimfiles\plugs\vim-plug\plug.vim" "'.$VIM.'\vimfiles\autoload\"'
-#elseif has('unix') || has('mac') || has('macunix')
-elseif g:vprof[g:Unix] || g:vprof[g:Mac]
+elseif g:Unix || g:Mac
 	plug_pos = '~/.vim/plugs'
 	# var plug_copy_command = 'cp ~/.vim/plugs/vim-plug/plug.vim ~/.vim/autoload/'
 endif
@@ -43,7 +41,9 @@ Plug 'junegunn/vim-easy-align'
 
 #Plug 'wakatime/vim-wakatime'
 Plug 'easymotion/vim-easymotion'
+
 Plug 'tpope/vim-surround'
+Plug 'luochen1990/rainbow'
 
 # start up""""""""""""""""""""
 Plug 'mhinz/vim-startify'
@@ -52,7 +52,7 @@ Plug 'mhinz/vim-startify'
 Plug 'skywind3000/vim-quickui'
 
 # fuzzy finder""""""""""""""""""""
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+Plug 'liuchengxu/vim-clap' #, { 'do': ':Clap install-binary' }
 # buffer manage""""""""""""""""""""
 Plug 'Asheq/close-buffers.vim'
 
@@ -89,7 +89,7 @@ plug#end()
 #""""""""""""""""""""""""""""""""""""""""""""""""""
 # Easymotion """"""""""""""""""""""""""""""""""""""
 
-if has_key(g:plugs, 'easymotion')
+if has_key(g:plugs, 'vim-easymotion')
 	# disable all default mappings
 	g:EasyMotion_do_mapping = 0
 	g:EasyMotion_smartcase = 1
@@ -111,51 +111,33 @@ if has_key(g:plugs, 'vista.vim')
 		'go': 'coc',
 	}
 
-	# g:vista#renderer#icons = {
-    # 'var': "\uf0ae7",
-    # 'variable': "\uf0ae7",
-    # 'variables': "\uf0ae7",
-    # # 'const': "\uf0400",
-    # # 'constant': "\uf0400",
-    # 'constructor': "\uf0476",
-    # # 'method': "\uf01a7",
-    # 'package': "\uf03d3",
-    # 'packages': "\uf03d3",
-	# 'enum': "\uf0b0c",
-    # 'enumerator': "\uf0b0c",
-    # 'enummember': "\uf0bf8",
-    # 'module': "\uf1b3",
-    # 'modules': "\uf1b3",
-    # 'type': "\uf027a",
-    # 'typedef': "\uf027a",
-    # 'types': "\uf027a",
-    # 'field': "\ueb5f",
-    # 'fields': "\ueb5f",
-    # 'macro': "\uf8a3",
-    # 'macros': "\uf8a3",
-	# 'map': "\uf292",
-#    'class': "\uf0e8",
-#    'augroup': "\ufb44",
-#    'struct': "\uf318",
-#    'union': "\ufacd",
-#    'member': "\uf02b",
-#    'target': "\uf893",
-#    'property': "\ufab6",
-#    'interface': "\uf7fe",
-#    'namespace': "\uf475",
-#    'subroutine': "\uf9af",
-#    'implementation': "\uf776",
-#    'typeParameter': "\uf278",
-#    'default': "\uf29c"
-	# }
+	g:vista#renderer#icons = {
+      'var': "\uf0ae7",
+      'variable': "\uf0ae7",
+      'variables': "\uf0ae7",
+      'const': "\uf0400",
+      'constant': "\uf0400",
+      'constructor': "\uf0476",
+      'method': "\uf01a8",
+      'module': "\uf1b3",
+      'modules': "\uf1b3",
+      'type': "\uf0b1b",
+      'typedef': "\uf0b1b",
+      'types': "\uf0b1b",
+      'macro': "\uf0f6d",
+      'macros': "\uf0f6d",
+      'class': "\uf01a7",
+      'struct': "\uf01a6",
+      'member': "\uf02b",
+      'target': "\uf04fe",
+      'property': "\uf05b7",
+	}
 
 endif
 
 #""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Coc exlorer """""""""""""""""""""""""""""""""""""""
+# Coc.nvim """""""""""""""""""""""""""""""""""""""
 if has_key(g:plugs, 'coc.nvim')
-# window mappings
-
 	# highlight symbol under the cursor.
 	autocmd CursorHold * silent call CocActionAsync('highlight')
 	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
@@ -195,3 +177,38 @@ endif
 
 # Vimspector """"""""""""""""""""""""""""""""""""""""""""""
 g:vimspector_enable_mappings = 'HUMAN'
+
+
+# Rainbow """""""""""""""""""""""""""""""""""""""""""""""""""
+g:rainbow_active = 1
+g:rainbow_conf = {
+	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+	'guis': [''],
+	'cterms': [''],
+	'operators': '_,_',
+	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+	'separately': {
+		'*': {},
+		'markdown': {
+			'parentheses_options': 'containedin=markdownCode contained', # enable rainbow for code blocks only
+		},
+		'lisp': {
+			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'], # lisp needs more colors for parentheses :)
+		},
+		'haskell': {
+			'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/\v\{\ze[^-]/ end=/}/ fold'], #the haskell lang pragmas should be excluded
+		},
+		'vim': {
+			'parentheses_options': 'containedin=vimFuncBody', #enable rainbow inside vim function body
+		},
+		'perl': {
+			'syn_name_prefix': 'perlBlockFoldRainbow', #solve the [perl indent-depending-on-syntax problem](https://github.com/luochen1990/rainbow/issues/20)
+		},
+		'stylus': {
+			'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'], # [vim css color](https://github.com/ap/vim-css-color) compatibility
+		},
+		'css': 0, #disable this plugin for css files
+		'nerdtree': 0, #rainbow is conflicting with NERDTree, creating extra parentheses
+	}
+}

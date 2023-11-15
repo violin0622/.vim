@@ -37,7 +37,7 @@ endif
 # MacVim GUI 开启 Option 键映射
 # 会自动将 <M-a> 这样的映射翻译为 å，
 # 因此在插入模式下依然可以用 Option 组合键输入 UTF-8 字符。
-if g:vprof[g:Mac] && g:vprof[g:GUI]
+if g:Mac && g:GUI
 	set macmeta
 endif
 

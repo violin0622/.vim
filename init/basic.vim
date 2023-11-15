@@ -18,6 +18,8 @@ vim9script
 # 禁用 vi 兼容模式
 set nocompatible
 
+set belloff=all
+
 # 文件变更自动加载
 set autoread
 

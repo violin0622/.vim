@@ -1,29 +1,26 @@
 vim9script
 
-g:Win = '__win__'
-g:Mac = '__mac__'
-g:Unix = '__unix__'
-g:GUI = '__gui__'
-g:Term = '__term__'
-g:vprof = {
-'__win__': 0,
-'__mac__': 0,
-'__unix__': 0,
-'__gui__': 0,
-'__term__': 0,
-}
+g:Mac = 0
+g:Win = 0
+g:Unix = 0
+g:GUI = 0
+g:Term = 0
 
 if has('win32') || has('win64') || has('win32unix')
-	g:vprof[g:Win] = 1
+	g:Win = 1
 elseif has('mac') || has('macunix')
-	g:vprof[g:Mac] = 1
+	g:Mac = 1
 elseif has('linux') || has('unix')
-	g:vprof[g:Unix] = 1
+	g:Unix = 1
 endif
 if has('gui_running')
-	g:vprof[g:GUI] = 1
+	g:GUI = 1
 else
-	g:vprof[g:Term] = 1
+	g:Term = 1
+endif
+
+if g:Mac
+	set macligatures
 endif
 
 # 防止重复加载
@@ -31,10 +28,6 @@ if get(s:, 'loaded', 0)
 	finish
 else
 	var loaded = 1
-endif
-
-if g:vprof[g:Mac] && g:vprof[g:GUI]
-	set shell=/bin/zsh\ -i
 endif
 
 # 取得本文件所在的目录

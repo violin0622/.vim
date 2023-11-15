@@ -164,10 +164,14 @@ elseif g:colors_name == 'dessert'
 	# 修正补全目录的色彩：默认太难看
 	hi! Pmenu guibg=gray guifg=black ctermbg=gray ctermfg=black
 	hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
-elseif g:colors_name == 'onedark'
-	# 将默认青色的 virtual text 设置为一个低调点的颜色
-	hi CocInlayHint guifg=#5F789A
+# elseif g:colors_name == 'onedark'
 endif
+
+# 将默认青色的 virtual text 设置为一个低调点的颜色
+hi CocInlayHint guifg=#5F789A
+hi CocHighlightText cterm=bold ctermfg=white guifg=white
+hi CocHighlightRead cterm=bold ctermfg=white gui=bold guifg=white
+hi CocHighlightWrite cterm=bold ctermfg=white gui=italic guifg=white
 
 
 #----------------------------------------------------------------------
