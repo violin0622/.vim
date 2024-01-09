@@ -19,10 +19,6 @@ else
 	g:Term = 1
 endif
 
-if g:Mac
-	set macligatures
-endif
-
 # 防止重复加载
 if get(s:, 'loaded', 0)
 	finish

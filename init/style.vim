@@ -51,23 +51,26 @@ set listchars=tab:│\ ,leadmultispace:\|\ \ \ ,trail:·,extends:>,precedes:<
 # set fillchars+=vert:‖
 set fillchars+=vert:\ 
 
-if has('win32') || has('win64') || has('win32unix')
-	set guifont=Consolas:h12	# 设置字体字号
-elseif has('mac') || has('macunix')
+# 设置连字显示
+if g:Mac && has('gui')
 	set macligatures
+elseif g:Unix
+	set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
+endif
 
+# 设置字体字号
+if g:Win
+	set guifont=Consolas:h12
+elseif g:Mac
 	# set guifont=Sauce\ Code\ Pro\ Nerd\ Font\ Complete:h13
 	# set guifont=FiraCodeNerdFontComplete-Regular:h16
-	set guifont=JetBrainsMonoNF-Regular:h13
-elseif has('unix')
-	# 设置连字显示
-	set guiligatures=!\"$%&\'()*+,-./:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{\|}~
-
+	# set guifont=JetBrainsMonoNF-Regular:h13
+	set guifont=MapleMonoSCNF-Regular:h13
+elseif g:Unix
 	# set guifont=FiraCode\ Nerd\ Font\ 11
 	set guifont=JetBrainsMono\ Nerd\ Font\ 11
 	# set guifont=VictorMono\ Nerd\ Font\ 11
 endif
-
 
 #----------------------------------------------------------------------
 # 颜色主题：色彩文件位于 colors 目录中
@@ -85,10 +88,10 @@ endif
 
 # 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
 try
-	colorscheme onedark
+	colorscheme nord
 catch
 	try
-		colorscheme tomorrow
+		colorscheme tomorrow-night
 	catch
 		try
 			colorscheme monokai
@@ -173,6 +176,7 @@ hi CocHighlightText cterm=bold ctermfg=white guifg=white
 hi CocHighlightRead cterm=bold ctermfg=white gui=bold guifg=white
 hi CocHighlightWrite cterm=bold ctermfg=white gui=italic guifg=white
 
+hi VistaIcon gui=italic font=UbuntuNFP:h13
 
 #----------------------------------------------------------------------
 # 终端设置，隐藏行号和侧边栏

@@ -20,15 +20,22 @@ plug#begin(plug_pos)
 # Chinese Document""""""""""""""""""""""""""""
 Plug 'yianwillis/vimcdoc'
 
-# Key mapping suggestion
+# Key mapping suggestion"""""""""""""""""""""
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
+# Color schemes""""""""""""""""""""""""""""""
 Plug 'crusoexia/vim-monokai'
 #Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'joshdick/onedark.vim'
 Plug 'lifepillar/vim-solarized8'
+#Plug 'olimorris/onedarkpro.nvim'
+Plug 'EdenEast/nightfox.nvim'
+Plug 'nordtheme/vim'
 
-# status line""""""""""""""""""""
+Plug 'chrisbra/Colorizer'
+
+#dsf  status line""""""""""""""""""""
 Plug 'vim-airline/vim-airline'
 
 # Markdown""""""""""""""""""""
@@ -82,7 +89,7 @@ Plug 'florentc/vim-tla'
 # Spell Check
 Plug 'psliwka/vim-dirtytalk', { 'do': ':DirtytalkUpdate' }
 
-Plug 'github/copilot.vim'
+# Plug 'github/copilot.vim'
 
 plug#end()
 
@@ -112,25 +119,44 @@ if has_key(g:plugs, 'vista.vim')
 	}
 
 	g:vista#renderer#icons = {
-      'var': "\uf0ae7",
-      'variable': "\uf0ae7",
-      'variables': "\uf0ae7",
-      'const': "\uf0400",
-      'constant': "\uf0400",
-      'constructor': "\uf0476",
-      'method': "\uf01a8",
-      'module': "\uf1b3",
-      'modules': "\uf1b3",
-      'type': "\uf0b1b",
-      'typedef': "\uf0b1b",
-      'types': "\uf0b1b",
-      'macro': "\uf0f6d",
-      'macros': "\uf0f6d",
-      'class': "\uf01a7",
-      'struct': "\uf01a6",
-      'member': "\uf02b",
-      'target': "\uf04fe",
-      'property': "\uf05b7",
+      'func': "\Uf0295",
+      'function': "\Uf0295",
+      'functions': "\Uf0295",
+      'var': '󰫧',
+      'variable': '󰫧',
+      'variables': '󰫧',
+      'const': '󰐀',
+      'constant': '󰐀',
+      'constructor': '󰣪',
+	  'method': '󰆨',
+      'package': "\ueb29",
+      'packages': "\ueb29",
+      'enum': "\uea95",
+      'enummember': "\ueb5e",
+      'enumerator': "\uea95",
+      'module': '',
+      'modules': '',
+      'type': '󰬛',
+      'typedef': '󰬛',
+      'types': '󰬛',
+      'field': "\ueb5f",
+      'fields': "\ueb5f",
+      'macro': '󰽭',
+      'macros': '󰽭',
+      'map': "\Uf0645",
+      'class': '󰬊',
+      'augroup': "\Uf0645",
+      'struct': '󰬚',
+      'union': "\Uf0564",
+      'member': '',
+      'target': '󰓾',
+      'property': '󰖷',
+      'interface': "\ueb61",
+      'namespace': "\uea8b",
+      'subroutine': "\Uf04b0",
+      'implementation': "\uebba",
+      'typeParameter': "\uea92",
+      'default': "\uf29c"
 	}
 
 endif
@@ -180,10 +206,12 @@ g:vimspector_enable_mappings = 'HUMAN'
 
 
 # Rainbow """""""""""""""""""""""""""""""""""""""""""""""""""
-g:rainbow_active = 1
+g:rainbow_active = 0
 g:rainbow_conf = {
-	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+	'guifgs': ['lightblue', 'blue', 'darkblue', 'slateblue'],
+	'gctermfgs': ['lightblue', 'blue', 'darkblue', 'slateblue'],
+	# 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+	# 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
 	'guis': [''],
 	'cterms': [''],
 	'operators': '_,_',
